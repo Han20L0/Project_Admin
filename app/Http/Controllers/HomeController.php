@@ -13,9 +13,9 @@ class HomeController extends Controller
         return view("dashboard");
     }
     public function index(){
-        $datauser = User::get();
+        $data = User::get();
 
-        return view('index',compact('datauser'));
+        return view('index',compact('data'));
     }
     public function create(){
         return view('create');
@@ -63,6 +63,15 @@ class HomeController extends Controller
         }
 
         User::whereId($id)->update($data);
+
+        return redirect()->route('index');
+    }
+    public function delete(Request $request,$id)  {
+        $data = User::find($id);
+
+        if($data){
+            $data->delete();
+        }
 
         return redirect()->route('index');
     }
