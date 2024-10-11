@@ -22,23 +22,15 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <form action="{{route('user.store')}}" method="POST">
+        <form action="{{route('user.update',['id'=>$data->id])}}" method="POST">
             @csrf
-            {{-- @if (session('errors'))
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif --}}
+            @method('PUT')
             <div class="row">
                 <div class="col-md-6">
                     <!-- general form elements -->
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Form Add User</h3>
+                        <h3 class="card-title">Form edit User</h3>
                     </div>
                     <!-- /.card-header -->
                         <!-- form start -->
@@ -46,14 +38,14 @@
                             <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
+                                <input type="email" class="form-control" name="email" value="{{$data->email}}" id="exampleInputEmail1" placeholder="Enter email">
                                 @error('email')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
-                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                                <input type="text" name="name" class="form-control" value="{{$data->name}}" id="exampleInputEmail1" placeholder="Enter Name">
                                 @error('name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
